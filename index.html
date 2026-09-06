@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les pumptracks de France</title>
+<meta name="description" content="Les 816 pumptracks de France, département par département : accès, revêtement, source. Recensement du ministère et OpenStreetMap.">
+<link rel="canonical" href="https://chardonneaur.github.io/pumptracks/">
+<link rel="alternate" hreflang="fr" href="https://chardonneaur.github.io/pumptracks/"><link rel="alternate" hreflang="en" href="https://chardonneaur.github.io/pumptracks/en/"><link rel="alternate" hreflang="x-default" href="https://chardonneaur.github.io/pumptracks/">
+<style>
+:root{--fond:#F4F3EF;--carte:#FFFFFF;--encre:#1A1C1B;--encre2:#585E5A;--encre3:#868C88;
+      --trait:#DEDDD4;--accent:#0F6E4C;--accent-doux:#0F6E4C1A;--terre:#B4532A}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+      --fond:#161917;--carte:#1E2220;--encre:#E9EBE8;--encre2:#AEB4B0;--encre3:#7E8582;
+      --trait:#2E3431;--accent:#4FB489;--accent-doux:#4FB48926;--terre:#D9765C}}
+:root[data-theme=dark]{--fond:#161917;--carte:#1E2220;--encre:#E9EBE8;--encre2:#AEB4B0;
+      --encre3:#7E8582;--trait:#2E3431;--accent:#4FB489;--accent-doux:#4FB48926;--terre:#D9765C}
+*{box-sizing:border-box}
+body{margin:0;padding:0 20px 80px;background:var(--fond);color:var(--encre);
+  font:16px/1.6 "Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+.wrap{max-width:740px;margin:0 auto}
+a{color:var(--accent)}
+header.bar{padding:22px 0;border-bottom:2px solid var(--trait);margin-bottom:34px}
+header.bar .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+header.bar a.marque{font-weight:700;text-decoration:none;color:var(--encre);letter-spacing:-.01em}
+header.bar a.langue{font-size:13px;color:var(--encre2);white-space:nowrap}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.12;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+h2{font-size:14px;letter-spacing:.09em;text-transform:uppercase;color:var(--encre2);
+  margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--trait)}
+.lede{font-size:19px;color:var(--encre2);margin:0 0 6px;max-width:60ch}
+.fil{font-size:13px;color:var(--encre3);margin:0 0 16px}
+.fil a{color:var(--encre3)}
+dl.faits{display:grid;grid-template-columns:auto 1fr;gap:9px 18px;margin:0 0 22px;font-size:15px}
+dl.faits dt{color:var(--encre3)}
+dl.faits dd{margin:0;font-weight:600}
+.source{display:inline-block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  background:var(--accent-doux);color:var(--accent);padding:3px 9px;border-radius:3px}
+.avert{border-left:3px solid var(--terre);padding:10px 0 10px 14px;margin:0 0 22px;
+  font-size:15px;color:var(--encre2)}
+ul.liste{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+ul.liste a{display:flex;justify-content:space-between;gap:14px;align-items:baseline;
+  padding:12px 14px;background:var(--carte);border-radius:3px;text-decoration:none;
+  color:var(--encre);border:1px solid var(--trait)}
+ul.liste a:hover{border-color:var(--accent)}
+ul.liste .meta{color:var(--encre3);font-size:13px;white-space:nowrap}
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 26px}
+.actions a{background:var(--accent);color:var(--fond);text-decoration:none;padding:10px 16px;
+  border-radius:3px;font-weight:600;font-size:15px}
+.actions a.second{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--trait);
+  font-size:13px;color:var(--encre3)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#carte{height:460px;border:1px solid var(--trait);border-radius:3px;background:var(--carte);
+  margin:0 0 10px;z-index:0}
+.carte-barre{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
+.carte-barre input{flex:1 1 200px;min-width:0;padding:10px 12px;font:inherit;font-size:15px;
+  background:var(--carte);color:var(--encre);border:1px solid var(--trait);border-radius:3px}
+.carte-barre button{padding:10px 16px;font:inherit;font-size:15px;font-weight:600;cursor:pointer;
+  background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:3px}
+.legende{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px;color:var(--encre3);margin:0 0 30px}
+.legende span{display:flex;align-items:center;gap:7px}
+.legende i{width:12px;height:12px;border-radius:50%;flex:none}
+.legende i.exact{background:var(--accent);border:2px solid var(--accent)}
+.legende i.approx{border:2px dashed var(--terre)}
+.leaflet-popup-content{font:14px/1.5 system-ui,sans-serif}
+figure.cliches{margin:0 0 24px;display:grid;gap:8px}
+figure.cliches img{width:100%;height:auto;display:block;border:1px solid var(--trait);
+  border-radius:3px;background:var(--carte)}
+figure.cliches figcaption{font-size:13px;color:var(--encre3)}
+blockquote.dit{margin:22px 0;padding:0 0 0 16px;border-left:3px solid var(--accent);
+  font-size:17px;line-height:1.5;color:var(--encre)}
+blockquote.dit p{margin:0 0 6px}
+blockquote.dit footer{font-size:13px;color:var(--encre3);margin:0;padding:0;border:0}
+sup{color:var(--accent);font-weight:400;margin-left:2px;font-size:11px}
+ol.sources{margin:0 0 22px;padding:0;list-style:none;font-size:13px;color:var(--encre3)}
+ol.sources li{margin:0 0 4px}
+ol.sources sup{color:var(--accent)}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.min.css"><script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script><script defer src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script><script defer src="https://chardonneaur.github.io/pumptracks/assets/carte.js"></script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+<a class="marque" href="https://chardonneaur.github.io/pumptracks/">Les pumptracks de France</a>
+<a class="langue" href="https://chardonneaur.github.io/pumptracks/en/" hreflang="en" lang="en">Read this site in English</a>
+</div></header>
+<div class="wrap">
+
+<h1>Les pumptracks de France</h1>
+<p class="lede">816 pumptracks dans 718 communes, dont 448 en accès libre déclaré.</p>
+<p>Cet inventaire croise deux sources qui s'ignorent : le recensement des équipements sportifs du ministère et OpenStreetMap. <strong>Elles ne se recouvrent que sur 98 installations</strong> — un annuaire bâti sur une seule des deux en manquerait la moitié.</p>
+<h2>Où sont-ils</h2>
+<div class="carte-barre">
+  <input id="carte-filtre" type="search" placeholder="Filtrer par commune…" aria-label="Filtrer par commune…">
+  <button id="carte-ici" type="button" hidden>Près de moi</button>
+</div>
+<div id="carte" data-points="https://chardonneaur.github.io/pumptracks/carte.json" data-fiches="https://chardonneaur.github.io/pumptracks/pumptrack/"
+     data-libre="accès libre" data-approx="Position approchée : le centre de la commune"
+     data-voir="Voir la fiche" data-sansnom="Pumptrack de {c}"
+     data-compte="{n} pumptracks affichés" data-compte-partiel="{n} pumptracks sur {t}"
+     data-localisation="Localisation…" data-refus="Position refusée"></div>
+<p id="carte-compte" class="fil">Chargement de la carte…</p>
+<div class="legende">
+  <span><i class="exact"></i> Position relevée</span>
+  <span><i class="approx"></i> Position approchée : le centre de la commune</span>
+</div>
+<h2>Par département</h2>
+<ul class="liste grille"><li><a href="https://chardonneaur.github.io/pumptracks/departement/01/"><span>Ain</span><span class="meta">10</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/02/"><span>Aisne</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/03/"><span>Allier</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/04/"><span>Alpes-de-Haute-Provence</span><span class="meta">4</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/05/"><span>Hautes-Alpes</span><span class="meta">9</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/06/"><span>Alpes-Maritimes</span><span class="meta">11</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/07/"><span>Ardèche</span><span class="meta">11</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/09/"><span>Ariège</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/10/"><span>Aube</span><span class="meta">10</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/11/"><span>Aude</span><span class="meta">7</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/12/"><span>Aveyron</span><span class="meta">9</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/13/"><span>Bouches-du-Rhône</span><span class="meta">30</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/14/"><span>Calvados</span><span class="meta">4</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/15/"><span>Cantal</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/16/"><span>Charente</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/17/"><span>Charente-Maritime</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/18/"><span>Cher</span><span class="meta">7</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/19/"><span>Corrèze</span><span class="meta">7</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/21/"><span>Côte-d&#x27;Or</span><span class="meta">6</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/22/"><span>Côtes-d&#x27;Armor</span><span class="meta">19</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/23/"><span>Creuse</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/24/"><span>Dordogne</span><span class="meta">6</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/25/"><span>Doubs</span><span class="meta">5</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/26/"><span>Drôme</span><span class="meta">11</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/27/"><span>Eure</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/28/"><span>Eure-et-Loir</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/29/"><span>Finistère</span><span class="meta">18</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/30/"><span>Gard</span><span class="meta">18</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/31/"><span>Haute-Garonne</span><span class="meta">15</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/32/"><span>Gers</span><span class="meta">5</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/33/"><span>Gironde</span><span class="meta">10</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/34/"><span>Hérault</span><span class="meta">36</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/35/"><span>Ille-et-Vilaine</span><span class="meta">14</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/36/"><span>Indre</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/37/"><span>Indre-et-Loire</span><span class="meta">11</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/38/"><span>Isère</span><span class="meta">49</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/39/"><span>Jura</span><span class="meta">10</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/40/"><span>Landes</span><span class="meta">15</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/41/"><span>Loir-et-Cher</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/42/"><span>Loire</span><span class="meta">8</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/43/"><span>Haute-Loire</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/44/"><span>Loire-Atlantique</span><span class="meta">20</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/45/"><span>Loiret</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/46/"><span>Lot</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/47/"><span>Lot-et-Garonne</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/48/"><span>Lozère</span><span class="meta">6</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/49/"><span>Maine-et-Loire</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/50/"><span>Manche</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/51/"><span>Marne</span><span class="meta">12</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/53/"><span>Mayenne</span><span class="meta">11</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/54/"><span>Meurthe-et-Moselle</span><span class="meta">21</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/55/"><span>Meuse</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/56/"><span>Morbihan</span><span class="meta">17</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/57/"><span>Moselle</span><span class="meta">20</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/58/"><span>Nièvre</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/59/"><span>Nord</span><span class="meta">12</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/60/"><span>Oise</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/61/"><span>Orne</span><span class="meta">4</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/62/"><span>Pas-de-Calais</span><span class="meta">11</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/63/"><span>Puy-de-Dôme</span><span class="meta">4</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/64/"><span>Pyrénées-Atlantiques</span><span class="meta">7</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/65/"><span>Hautes-Pyrénées</span><span class="meta">11</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/66/"><span>Pyrénées-Orientales</span><span class="meta">13</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/67/"><span>Bas-Rhin</span><span class="meta">13</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/68/"><span>Haut-Rhin</span><span class="meta">8</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/69/"><span>Rhône</span><span class="meta">15</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/70/"><span>Haute-Saône</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/71/"><span>Saône-et-Loire</span><span class="meta">9</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/72/"><span>Sarthe</span><span class="meta">9</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/73/"><span>Savoie</span><span class="meta">40</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/74/"><span>Haute-Savoie</span><span class="meta">36</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/76/"><span>Seine-Maritime</span><span class="meta">6</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/77/"><span>Seine-et-Marne</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/78/"><span>Yvelines</span><span class="meta">6</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/79/"><span>Deux-Sèvres</span><span class="meta">4</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/80/"><span>Somme</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/81/"><span>Tarn</span><span class="meta">5</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/82/"><span>Tarn-et-Garonne</span><span class="meta">4</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/83/"><span>Var</span><span class="meta">12</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/84/"><span>Vaucluse</span><span class="meta">7</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/85/"><span>Vendée</span><span class="meta">6</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/86/"><span>Vienne</span><span class="meta">6</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/87/"><span>Haute-Vienne</span><span class="meta">10</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/88/"><span>Vosges</span><span class="meta">9</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/89/"><span>Yonne</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/90/"><span>Territoire de Belfort</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/91/"><span>Essonne</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/92/"><span>Hauts-de-Seine</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/94/"><span>Val-de-Marne</span><span class="meta">2</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/974/"><span>La Réunion</span><span class="meta">3</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/987/"><span>987</span><span class="meta">1</span></a></li>
+<li><a href="https://chardonneaur.github.io/pumptracks/departement/988/"><span>988</span><span class="meta">4</span></a></li></ul>
+<h2>Ce que les données n&#x27;auront jamais</h2>
+<p>Aucune source ouverte ne dit si le revêtement s'est fissuré, si les modules tiennent encore, si l'endroit vaut le détour un dimanche. Ça, il faut y être allé. Si vous connaissez un de ces 816 pumptracks — ou un qui manque à l'appel — chaque fiche porte un lien pour le dire.</p>
+<div class="actions">
+  <a href="https://github.com/Chardonneaur/pumptracks/issues/new?template=manquant.yml" rel="nofollow noopener">Signaler un pumptrack absent</a>
+  <a class="second" href="https://github.com/Chardonneaur/pumptracks/blob/main/CONTRIBUTING.md" rel="noopener">Comment contribuer</a>
+</div>
+<h2>Ce que ce site s&#x27;interdit</h2>
+<p>Une fiche n'affirme que ce qu'une source déclare. Aucun revêtement supposé, aucun accès « fermé » déduit d'un silence : un champ absent n'a pas été renseigné, et ne vaut pas « non ». Chaque fiche porte sa source en clair.</p>
+<p>181 fiches n'ont de position dans aucune des deux sources : leur point est le centre de leur commune, et elles le disent.</p>
+
+<footer>
+Données : recensement des équipements sportifs du ministère des Sports (Licence Ouverte 2.0) et <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> (ODbL). Chaque fiche indique sa source. Un champ absent ne vaut pas « non » : il n'a simplement pas été déclaré.
+</footer>
+</div>
+</body>
+</html>

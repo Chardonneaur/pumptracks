@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pumptrack — pumptrack in Toul</title>
+<meta name="description" content="pumptrack, a pumptrack in Toul, France, openly accessible. Source: French sports ministry census.">
+<link rel="canonical" href="https://chardonneaur.github.io/pumptracks/en/pumptrack/toul/">
+<link rel="alternate" hreflang="fr" href="https://chardonneaur.github.io/pumptracks/pumptrack/toul/"><link rel="alternate" hreflang="en" href="https://chardonneaur.github.io/pumptracks/en/pumptrack/toul/"><link rel="alternate" hreflang="x-default" href="https://chardonneaur.github.io/pumptracks/pumptrack/toul/">
+<style>
+:root{--fond:#F4F3EF;--carte:#FFFFFF;--encre:#1A1C1B;--encre2:#585E5A;--encre3:#868C88;
+      --trait:#DEDDD4;--accent:#0F6E4C;--accent-doux:#0F6E4C1A;--terre:#B4532A}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+      --fond:#161917;--carte:#1E2220;--encre:#E9EBE8;--encre2:#AEB4B0;--encre3:#7E8582;
+      --trait:#2E3431;--accent:#4FB489;--accent-doux:#4FB48926;--terre:#D9765C}}
+:root[data-theme=dark]{--fond:#161917;--carte:#1E2220;--encre:#E9EBE8;--encre2:#AEB4B0;
+      --encre3:#7E8582;--trait:#2E3431;--accent:#4FB489;--accent-doux:#4FB48926;--terre:#D9765C}
+*{box-sizing:border-box}
+body{margin:0;padding:0 20px 80px;background:var(--fond);color:var(--encre);
+  font:16px/1.6 "Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+.wrap{max-width:740px;margin:0 auto}
+a{color:var(--accent)}
+header.bar{padding:22px 0;border-bottom:2px solid var(--trait);margin-bottom:34px}
+header.bar .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+header.bar a.marque{font-weight:700;text-decoration:none;color:var(--encre);letter-spacing:-.01em}
+header.bar a.langue{font-size:13px;color:var(--encre2);white-space:nowrap}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.12;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+h2{font-size:14px;letter-spacing:.09em;text-transform:uppercase;color:var(--encre2);
+  margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--trait)}
+.lede{font-size:19px;color:var(--encre2);margin:0 0 6px;max-width:60ch}
+.fil{font-size:13px;color:var(--encre3);margin:0 0 16px}
+.fil a{color:var(--encre3)}
+dl.faits{display:grid;grid-template-columns:auto 1fr;gap:9px 18px;margin:0 0 22px;font-size:15px}
+dl.faits dt{color:var(--encre3)}
+dl.faits dd{margin:0;font-weight:600}
+.source{display:inline-block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  background:var(--accent-doux);color:var(--accent);padding:3px 9px;border-radius:3px}
+.avert{border-left:3px solid var(--terre);padding:10px 0 10px 14px;margin:0 0 22px;
+  font-size:15px;color:var(--encre2)}
+ul.liste{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+ul.liste a{display:flex;justify-content:space-between;gap:14px;align-items:baseline;
+  padding:12px 14px;background:var(--carte);border-radius:3px;text-decoration:none;
+  color:var(--encre);border:1px solid var(--trait)}
+ul.liste a:hover{border-color:var(--accent)}
+ul.liste .meta{color:var(--encre3);font-size:13px;white-space:nowrap}
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 26px}
+.actions a{background:var(--accent);color:var(--fond);text-decoration:none;padding:10px 16px;
+  border-radius:3px;font-weight:600;font-size:15px}
+.actions a.second{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--trait);
+  font-size:13px;color:var(--encre3)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#carte{height:460px;border:1px solid var(--trait);border-radius:3px;background:var(--carte);
+  margin:0 0 10px;z-index:0}
+.carte-barre{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
+.carte-barre input{flex:1 1 200px;min-width:0;padding:10px 12px;font:inherit;font-size:15px;
+  background:var(--carte);color:var(--encre);border:1px solid var(--trait);border-radius:3px}
+.carte-barre button{padding:10px 16px;font:inherit;font-size:15px;font-weight:600;cursor:pointer;
+  background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:3px}
+.legende{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px;color:var(--encre3);margin:0 0 30px}
+.legende span{display:flex;align-items:center;gap:7px}
+.legende i{width:12px;height:12px;border-radius:50%;flex:none}
+.legende i.exact{background:var(--accent);border:2px solid var(--accent)}
+.legende i.approx{border:2px dashed var(--terre)}
+.leaflet-popup-content{font:14px/1.5 system-ui,sans-serif}
+figure.cliches{margin:0 0 24px;display:grid;gap:8px}
+figure.cliches img{width:100%;height:auto;display:block;border:1px solid var(--trait);
+  border-radius:3px;background:var(--carte)}
+figure.cliches figcaption{font-size:13px;color:var(--encre3)}
+blockquote.dit{margin:22px 0;padding:0 0 0 16px;border-left:3px solid var(--accent);
+  font-size:17px;line-height:1.5;color:var(--encre)}
+blockquote.dit p{margin:0 0 6px}
+blockquote.dit footer{font-size:13px;color:var(--encre3);margin:0;padding:0;border:0}
+sup{color:var(--accent);font-weight:400;margin-left:2px;font-size:11px}
+ol.sources{margin:0 0 22px;padding:0;list-style:none;font-size:13px;color:var(--encre3)}
+ol.sources li{margin:0 0 4px}
+ol.sources sup{color:var(--accent)}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SportsActivityLocation", "name": "pumptrack", "url": "https://chardonneaur.github.io/pumptracks/en/pumptrack/toul/", "sport": "Pumptrack", "inLanguage": "en", "address": {"@type": "PostalAddress", "addressLocality": "Toul", "addressCountry": "FR"}, "publicAccess": true}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://chardonneaur.github.io/pumptracks/en/"}, {"@type": "ListItem", "position": 2, "name": "Meurthe-et-Moselle", "item": "https://chardonneaur.github.io/pumptracks/en/department/54/"}, {"@type": "ListItem", "position": 3, "name": "Toul", "item": "https://chardonneaur.github.io/pumptracks/en/pumptrack/toul/"}]}</script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+<a class="marque" href="https://chardonneaur.github.io/pumptracks/en/">Pumptracks in France</a>
+<a class="langue" href="https://chardonneaur.github.io/pumptracks/pumptrack/toul/" hreflang="fr" lang="fr">Lire ce site en français</a>
+</div></header>
+<div class="wrap">
+
+<p class="fil"><a href="https://chardonneaur.github.io/pumptracks/en/">Home</a> › <a href="https://chardonneaur.github.io/pumptracks/en/department/54/">Meurthe-et-Moselle</a> › Toul</p>
+<h1>pumptrack</h1>
+<p class="lede">Pumptrack in Toul (54), France.</p>
+<p class="avert">The position shown is the <strong>centre of the commune</strong>, not that of the pumptrack: neither source gives its coordinates. To be checked on the ground. <a href="https://github.com/Chardonneaur/pumptracks/issues/new?template=fiche.yml&amp;title=pumptrack+%E2%80%94+Toul&amp;fiche=toul&amp;url=https%3A%2F%2Fchardonneaur.github.io%2Fpumptracks%2Fpumptrack%2Ftoul%2F" rel="nofollow noopener">Do you know where it actually is?</a></p>
+<div class="actions"><a class="second" href="https://github.com/Chardonneaur/pumptracks/issues/new?template=fiche.yml&amp;title=pumptrack+%E2%80%94+Toul&amp;fiche=toul&amp;url=https%3A%2F%2Fchardonneaur.github.io%2Fpumptracks%2Fpumptrack%2Ftoul%2F" rel="nofollow noopener">Improve this page</a></div>
+
+
+<h2>What the sources declare</h2>
+<dl class="faits"><dt>Area</dt><dd>540.0 m²</dd>
+<dt>Access</dt><dd>Open</dd>
+<dt>In service since</dt><dd>2016</dd>
+<dt>Owner</dt><dd>Commune de Toul</dd>
+<dt>Source</dt><dd>French sports ministry census</dd></dl>
+<p style="font-size:14px;color:var(--encre3)">Nothing else is declared about this facility. A field missing from this list was never filled in — it is not an observed absence.</p>
+
+<footer>
+Data: the French sports ministry's sports-facilities census (Licence Ouverte 2.0) and <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> (ODbL). Every page names its source. A missing field does not mean “no”: it simply was never declared.
+</footer>
+</div>
+</body>
+</html>

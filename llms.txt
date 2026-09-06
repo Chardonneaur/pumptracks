@@ -1,0 +1,71 @@
+# Les pumptracks de France / Pumptracks in France
+
+> Inventaire ouvert des 816 pumptracks de France, dans 718 communes, avec
+> leur commune, leur acces, leur revetement quand il est declare, et la source
+> de chaque fait.
+> Open inventory of the 816 pumptracks in France, across 718 communes,
+> with commune, access, surface where declared, and the source of every fact.
+
+Deux sources qui s'ignorent : le recensement des equipements sportifs du ministere
+francais des Sports (Licence Ouverte 2.0) et OpenStreetMap (ODbL). Elles ne se
+recouvrent que sur 98 installations — un annuaire bati sur une seule des deux
+en manquerait la moitie. / Two sources that ignore one another; they overlap on
+only 98 facilities. Derniere generation / last build: 2026-09-06.
+
+## Ce que ce jeu de donnees ne fait pas / What this dataset does not do
+
+Aucun fait n'est devine. Un pumptrack sans revetement declare n'a pas de champ
+`revetement` : le blanc se tait, il ne vaut ni « inconnu » ni « bitume ». Un acces
+non declare ne vaut pas « ferme ». / No fact is inferred. A missing field was never
+declared; it does not mean "no".
+
+181 fiches sur 816 n'ont de coordonnees dans aucune des deux sources : leur
+position est le centre de leur commune et porte `position_approchee: true`. Les
+traiter comme les autres enverrait quelqu'un a deux kilometres de l'agres. /
+181 of 816 entries carry the centre of their commune instead of their own
+coordinates, flagged `position_approchee`.
+
+## Jeu de donnees / Dataset
+
+- [pumptracks.json](https://chardonneaur.github.io/pumptracks/pumptracks.json) — l'inventaire complet, une entree par
+  pumptrack, avec `source` valant `recensement`, `osm` ou `les deux`. /
+  the full inventory, one entry per pumptrack, each naming its source.
+- [carte.json](https://chardonneaur.github.io/pumptracks/carte.json) — les points seuls, aux cles abregees
+  (`i` identifiant, `n` nom, `c` commune, `y`/`x` latitude/longitude,
+  `a` position approchee, `l` acces libre declare). / points only, short keys.
+
+## Pages / Pages
+
+- [Accueil](https://chardonneaur.github.io/pumptracks/) — carte des 816 points et annuaire par departement.
+- [Home](https://chardonneaur.github.io/pumptracks/en/) — same in English.
+- Une page par pumptrack / one page per pumptrack:
+  `https://chardonneaur.github.io/pumptracks/pumptrack/<commune>/` (fr), `https://chardonneaur.github.io/pumptracks/en/pumptrack/<commune>/` (en).
+- Une page par departement / one page per department:
+  `https://chardonneaur.github.io/pumptracks/departement/<code>/` (fr), `https://chardonneaur.github.io/pumptracks/en/department/<code>/` (en) —
+  92 departements.
+- Plans de site / sitemaps: [sitemap.xml](https://chardonneaur.github.io/pumptracks/sitemap.xml),
+  [sitemap-fr.xml](https://chardonneaur.github.io/pumptracks/sitemap-fr.xml), [sitemap-en.xml](https://chardonneaur.github.io/pumptracks/sitemap-en.xml).
+
+## Ce que la commune en dit / What the town says
+
+1 fiche porte ce que sa commune publie sur son propre equipement :
+origine du projet, entreprise qui l'a bati, dates, cout. 5 documents municipaux
+cites, lies sous la section, et chaque fait renvoie au sien. Ni le recensement ni
+OSM ne portent ces faits. / 1 entry
+carries what the town itself publishes about its
+facility, each statement pointing at the document behind it.
+
+## Photos / Photos
+
+2 photos prises sur place, sur 1 fiche : la seule matiere
+du site qu'aucune des deux sources ne porte. Chacune est datee du jour du passage,
+servie en 800 et 1600 pixels de large sous `https://chardonneaur.github.io/pumptracks/photos/<commune>/`, et porte sa
+propre licence — distincte de celle des donnees, et ecrite sous l'image. A defaut
+d'auteur nomme, le credit va au site. / 2 photos taken on the ground, across
+1 entry: dated, served at two
+widths, each carrying its own licence under the image.
+
+## Contribuer / Contributing
+
+Ce qu'aucune donnee ouverte ne portera : l'etat du revetement, une photo, une
+position relevee sur place. [Comment contribuer](https://github.com/Chardonneaur/pumptracks/blob/main/CONTRIBUTING.md).
