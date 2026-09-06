@@ -1,0 +1,52 @@
+name: Signaler un pumptrack absent
+description: Un pumptrack que ni le ministère ni OpenStreetMap ne connaissent.
+title: "Pumptrack absent — "
+labels: ["terrain", "manquant"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        L'inventaire réunit deux sources qui, ensemble, en connaissent 816. Ni
+        l'une ni l'autre n'est exhaustive : un pumptrack construit l'an dernier
+        et jamais déclaré n'existe pour personne. Si vous en connaissez un,
+        c'est ici.
+
+  - type: input
+    id: commune
+    attributes:
+      label: La commune
+      placeholder: Rumilly (74)
+    validations:
+      required: true
+
+  - type: input
+    id: position
+    attributes:
+      label: Où exactement
+      description: >
+        Latitude et longitude si vous les avez — depuis Google Maps, appui long
+        sur le point. Sinon, un nom de rue ou de parc suffit à le retrouver.
+      placeholder: 45.8661, 5.9450
+
+  - type: input
+    id: nom
+    attributes:
+      label: Son nom, s'il en a un
+      placeholder: Pumptrack du Bois Carré
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Ce que vous en savez
+      placeholder: |
+        Ouvert en 2025, à côté du skatepark. Enrobé, accès libre.
+
+  - type: checkboxes
+    id: licence
+    attributes:
+      label: Réutilisation
+      options:
+        - label: >
+            J'accepte que ces informations soient publiées sur le site et
+            reprises librement, comme le reste de l'inventaire.
+          required: true

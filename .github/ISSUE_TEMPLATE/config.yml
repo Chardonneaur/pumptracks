@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Corriger directement dans OpenStreetMap
+    url: https://www.openstreetmap.org/
+    about: >
+      Une correction faite dans OSM revient ici toute seule à la prochaine
+      construction, le 3 du mois — et profite à tous les autres réutilisateurs.
+      C'est le meilleur endroit pour une position ou un revêtement.

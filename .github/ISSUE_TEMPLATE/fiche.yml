@@ -1,0 +1,79 @@
+name: Corriger ou compléter une fiche
+description: Une position fausse, un revêtement, une photo, un pumptrack disparu.
+title: "Fiche à corriger"
+labels: ["terrain"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci. Ce que vous savez ici, aucune des deux sources ne le porte : le
+        recensement du ministère est déclaratif et OpenStreetMap s'arrête au
+        dessin. L'état du revêtement, une position relevée sur place, une photo —
+        c'est ce qui rend une fiche irremplaçable.
+
+        **Rien n'est obligatoire.** Un seul champ rempli vaut mieux qu'un
+        formulaire abandonné.
+
+  - type: input
+    id: fiche
+    attributes:
+      label: Quelle fiche
+      description: Pré-rempli si vous arrivez depuis le site. Sinon, la commune suffit.
+      placeholder: rumilly
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Adresse de la fiche
+      placeholder: https://chardonneaur.github.io/pumptracks/pumptrack/rumilly/
+
+  - type: checkboxes
+    id: quoi
+    attributes:
+      label: De quoi s'agit-il
+      options:
+        - label: La position est fausse ou approximative
+        - label: Le revêtement n'est pas celui indiqué
+        - label: L'accès n'est pas celui indiqué
+        - label: Ce pumptrack n'existe plus, ou n'a jamais existé
+        - label: Le nom est faux
+        - label: J'ai des photos
+        - label: Autre chose
+
+  - type: input
+    id: position
+    attributes:
+      label: La position, si vous l'avez
+      description: >
+        Latitude et longitude, séparées par une virgule. Depuis Google Maps :
+        appui long sur le point, les coordonnées s'affichent et se copient.
+      placeholder: 45.8661, 5.9450
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Ce que vous savez
+      description: >
+        Écrivez comme vous le diriez. Ce qui compte, c'est la date de votre
+        passage et ce que vous avez vu — pas la forme.
+      placeholder: |
+        Passé le 12 août 2026. Le revêtement est en enrobé, pas en terre.
+        Le module du fond a été démonté cet hiver.
+
+  - type: input
+    id: date
+    attributes:
+      label: Quand y êtes-vous passé
+      placeholder: août 2026
+
+  - type: checkboxes
+    id: licence
+    attributes:
+      label: Réutilisation
+      options:
+        - label: >
+            J'accepte que ces informations soient publiées sur le site et
+            reprises librement, comme le reste de l'inventaire.
+          required: true
