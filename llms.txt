@@ -1,0 +1,81 @@
+# Les pumptracks de France / Pumptracks in France
+
+> Inventaire ouvert des 826 pumptracks de France, dans 726 communes, avec
+> leur commune, leur acces, leur revetement quand il est declare, et la source
+> de chaque fait.
+> Open inventory of the 826 pumptracks in France, across 726 communes,
+> with commune, access, surface where declared, and the source of every fact.
+
+Deux sources qui s'ignorent : le recensement des equipements sportifs du ministere
+francais des Sports (Licence Ouverte 2.0) et OpenStreetMap (ODbL). Elles ne se
+recouvrent que sur 101 installations — un annuaire bati sur une seule des deux
+en manquerait la moitie. / Two sources that ignore one another; they overlap on
+only 101 facilities. Derniere generation / last build: 2026-09-10.
+
+## Ce que ce jeu de donnees ne fait pas / What this dataset does not do
+
+Aucun fait n'est devine. Un pumptrack sans revetement declare n'a pas de champ
+`revetement` : le blanc se tait, il ne vaut ni « inconnu » ni « bitume ». Un acces
+non declare ne vaut pas « ferme ». / No fact is inferred. A missing field was never
+declared; it does not mean "no".
+
+150 fiches sur 826 n'ont de coordonnees dans aucune des deux sources : leur
+position est le centre de leur commune et porte `position_approchee: true`. Les
+traiter comme les autres enverrait quelqu'un a deux kilometres de l'agres. /
+150 of 826 entries carry the centre of their commune instead of their own
+coordinates, flagged `position_approchee`.
+
+## Jeu de donnees / Dataset
+
+- [pumptracks.json](https://lespumptracks.com/pumptracks.json) — l'inventaire complet, une entree par
+  pumptrack, avec `source` valant `recensement`, `osm` ou `les deux`. /
+  the full inventory, one entry per pumptrack, each naming its source.
+- [carte.json](https://lespumptracks.com/carte.json) — les points seuls, aux cles abregees
+  (`i` identifiant, `n` nom, `c` commune, `y`/`x` latitude/longitude,
+  `a` position approchee, `l` acces libre declare). / points only, short keys.
+
+## Pages / Pages
+
+- [Accueil](https://lespumptracks.com/) — carte des 826 points et annuaire par departement.
+- [Home](https://lespumptracks.com/en/) — same in English.
+- Une page par pumptrack / one page per pumptrack:
+  `https://lespumptracks.com/pumptrack/<commune>/` (fr), `https://lespumptracks.com/en/pumptrack/<commune>/` (en).
+- Une page par departement / one page per department:
+  `https://lespumptracks.com/departement/<code>/` (fr), `https://lespumptracks.com/en/department/<code>/` (en) —
+  92 departements.
+- Plans de site / sitemaps: [sitemap.xml](https://lespumptracks.com/sitemap.xml),
+  [sitemap-fr.xml](https://lespumptracks.com/sitemap-fr.xml), [sitemap-en.xml](https://lespumptracks.com/sitemap-en.xml).
+
+## Ce que la commune en dit / What the town says
+
+68 fiches portes ce que sa commune publie sur son propre equipement :
+origine du projet, entreprise qui l'a bati, dates, cout. 83 documents municipaux
+cites, lies sous la section, et chaque fait renvoie au sien. Ni le recensement ni
+OSM ne portent ces faits. / 68 entries
+carry what the town itself publishes about its
+facility, each statement pointing at the document behind it.
+
+## Photos / Photos
+
+2 photos prises sur place, sur 1 fiche : la seule matiere
+du site qu'aucune des deux sources ne porte. Chacune est datee du jour du passage,
+servie en 800 et 1600 pixels de large sous `https://lespumptracks.com/photos/<commune>/`, et porte sa
+propre licence — distincte de celle des donnees, et ecrite sous l'image. A defaut
+d'auteur nomme, le credit va au site. / 2 photos taken on the ground, across
+1 entry: dated, served at two
+widths, each carrying its own licence under the image.
+
+## Vue du ciel / Aerial view
+
+494 fiches portent ce qu'on lit sur son orthophoto IGN :
+revetement, emprise au sol, nombre de bosses et de virages, marquage, niveau. C'est
+une observation datee, decrite sous l'image, jamais inscrite au tableau des faits
+declares ; dans le JSON-LD chaque valeur porte la mention « vue aerienne ». Manifeste :
+`vues/vues.json`. / 494 entries carry
+what can be read off the IGN orthophoto — surface, footprint, roller and turn counts,
+markings, level — as a dated observation kept apart from the declared facts.
+
+## Contribuer / Contributing
+
+Ce qu'aucune donnee ouverte ne portera : l'etat du revetement, une photo, une
+position relevee sur place. [Comment contribuer](https://github.com/Chardonneaur/pumptracks/blob/main/CONTRIBUTING.md).
