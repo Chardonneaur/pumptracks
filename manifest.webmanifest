@@ -1,0 +1,32 @@
+{
+  "name": "Les pumptracks de France",
+  "short_name": "Pumptracks",
+  "description": "Les pumptracks de France, departement par departement : acces, revetement, source. Recensement du ministere et OpenStreetMap.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "https://lespumptracks.com/",
+  "scope": "https://lespumptracks.com/",
+  "id": "https://lespumptracks.com/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F3EF",
+  "theme_color": "#0F6E4C",
+  "categories": [
+    "sports",
+    "travel"
+  ],
+  "icons": [
+    {
+      "src": "https://lespumptracks.com/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lespumptracks.com/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
